@@ -1,0 +1,60 @@
+#!/bin/bash
+
+#Volume increments in percent
+INC=5
+
+if [ "$1" == "volume" ]
+then
+
+    if [ "$2" == "down" ]
+    then
+     amixer -q set Master $INC%- unmute
+     TEXT="Volume: $(amixer sget Master | tail -1 | cut -d' ' -f7 | sed 's/\(\[\|\]\)//g')"
+    elif [ "$2" == "up" ]
+    then
+     amixer -q set Master $INC%+ unmute
+     TEXT="Volume: $(amixer sget Master | tail -1 | cut -d' ' -f7 | sed 's/\(\[\|\]\)//g')"
+    elif [ "$2" == "toggle" ]
+    then
+     amixer -q set Master toggle
+     TEXT="Volume: $(amixer sget Master | tail -1 | cut -d' ' -f8 | sed 's/\(\[\|\]\)//g')"
+    else
+     echo "Usage i3control [volume | brightness] [up | down | toggle]\n"
+     exit 1
+    fi
+
+
+elif [ "$1" == "brightness" ]
+then
+
+    if [ "$2" == "down" ]
+    then
+     xbacklight -steps 1 -time 0 -dec 20
+    elif [ "$2" == "up" ]
+    then
+     xbacklight -steps 1 -time 0 -inc 20
+    else
+     echo "Usage i3control [volume | brightness] [up | down | toggle]\n"
+     exit 1
+    fi
+
+    TEXT="Brightness: $(xbacklight -get | cut -d '.' -f1)%"
+
+else
+    echo "Usage i3control [volume | brightness] [up | down | toggle]\n"
+    exit 1
+fi
+
+IDFILE=$HOME/.i3/.notify
+
+if [ ! -e "$IDFILE" ] ; then
+    touch "$IDFILE"
+fi
+
+ID=$(cat $IDFILE)
+if [ -z $ID ]
+then
+    ID=0
+fi
+
+$HOME/.i3/scripts/notify.py $1 $ID "$TEXT" "" "" 2000 > $HOME/.i3/.notify

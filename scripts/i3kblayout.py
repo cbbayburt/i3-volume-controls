@@ -1,8 +1,11 @@
 #!/usr/bin/env python
 
-import sys, os, re
+import sys
+import os
+import re
 import notify
 from subprocess import check_output, check_call
+
 
 def main():
     curLayout = check_output(['setxkbmap', '-query']).split(',')[0]
@@ -20,7 +23,8 @@ def main():
 
     allLayouts = sys.argv[1:]
     try:
-        nextLayout = allLayouts[(allLayouts.index(curLayout) + 1) % len(allLayouts)]
+        nextLayout = allLayouts[(allLayouts.index(curLayout) + 1) %
+                                len(allLayouts)]
     except ValueError:
         nextLayout = allLayouts[0]
 
@@ -28,9 +32,10 @@ def main():
 
     showMsg(nextLayout)
 
+
 def showMsg(nextLayout):
 
-    idfile = os.getenv('HOME') + '/.i3/.notify_layout'
+    idfile = os.getenv('HOME') + '/.i3/.notify'
     if not os.path.exists(idfile):
         os.mknod(idfile)
 
@@ -38,7 +43,9 @@ def showMsg(nextLayout):
     if mid == "":
         mid = 0
 
-    mid = notify.notify('layout', mid, 'Layout: ' + nextLayout.upper(), '', '', 2000)
+    mid = notify.notify('layout', mid, 'Layout: ' + nextLayout.upper(),
+                        '', '', 2000)
+
     open(idfile, 'w').write(str(mid))
 
 if __name__ == '__main__':

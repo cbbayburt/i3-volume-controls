@@ -16,13 +16,13 @@
 set $refresh killall -s USR1 py3status
 
 # Volume controls
-bindsym XF86AudioLowerVolume exec $HOME/.i3/scripts/volume down && $refresh
-bindsym XF86AudioRaiseVolume exec $HOME/.i3/scripts/volume up && $refresh
-bindsym XF86AudioMute exec $HOME/.i3/scripts/volume toggle && $refresh
+bindsym XF86AudioLowerVolume exec $HOME/.i3/scripts/i3control volume down && $refresh
+bindsym XF86AudioRaiseVolume exec $HOME/.i3/scripts/i3control volume up && $refresh
+bindsym XF86AudioMute exec $HOME/.i3/scripts/i3control volume toggle && $refresh
 
 # Brightness controls
-bindsym XF86MonBrightnessDown exec xbacklight -steps 1 -time 0 -dec 5
-bindsym XF86MonBrightnessUp exec xbacklight -steps 1 -time 0 -inc 10
+bindsym XF86MonBrightnessDown exec $HOME/.i3/scripts/i3control brightness down
+bindsym XF86MonBrightnessUp exec $HOME/.i3/scripts/i3control brightness up
 
 # Keyboard layouts
 # To enable any layout for switching, add it to i3kblayout.py command as an argument
