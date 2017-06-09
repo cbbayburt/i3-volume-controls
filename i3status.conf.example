@@ -1,0 +1,30 @@
+# This is an example snippet for i3status config file for the features included
+# in this repository. These lines must be appended to the i3status config file 
+# in order to add the indicators to the status bar.
+#
+
+# I used FontAwesome for the icons. Feel free to change the labels if you don't
+# want to use it.
+
+# general {
+# 	colors = true
+# 	interval = 2
+#       output_format = i3bar
+# }
+
+order += "volume master"
+order += "external_script"
+
+volume master {
+	device = "default"
+	mixer = "Master"
+	mixer_idx = 0
+	format = " %volume "
+        format_muted = " OFF"
+}
+
+external_script {
+        format = " {output}"
+        script_path = "$HOME/.i3/scripts/i3layoutquery"
+}
+

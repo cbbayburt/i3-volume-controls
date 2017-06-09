@@ -5,11 +5,18 @@
 import sys
 import dbus
 
-notify = dbus.Interface(dbus.SessionBus()
-    .get_object("org.freedesktop.Notifications", "/org/freedesktop/Notifications"),
-    "org.freedesktop.Notifications")
 
-id = notify.Notify(sys.argv[1], int(sys.argv[2]), sys.argv[5], sys.argv[3], 
-        sys.argv[4], "", "", int(sys.argv[6]))
+def notify(*argv):
+    notify = dbus.Interface(dbus.SessionBus()
+                            .get_object("org.freedesktop.Notifications",
+                                        "/org/freedesktop/Notifications"),
+                            "org.freedesktop.Notifications")
 
-print id
+    print(argv)
+    id = notify.Notify(argv[0], int(argv[1]), argv[4], argv[2], argv[3], "",
+                       "", int(argv[5]))
+
+    return id
+
+if __name__ == '__main__':
+    print notify(sys.argv[1:])

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+$HOME/.i3/scripts/i3kblayout.py -q

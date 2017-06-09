@@ -1,0 +1,31 @@
+# This is an example snippet for i3 config file for the features included in this
+# repository. These lines must be appended to the i3 config file in order to use 
+# the features.
+#
+
+# If you do not wish to use py3status, you can use the i3status.sh
+# script to append the keyboard layout indicator to i3status.
+# Note that the $refresh command below will not work with this script.
+# You'll be better of removing $refresh command completely.
+#
+# bar {
+#   status_command $HOME/.i3/scripts/i3status.sh
+# }
+#
+# command to refresh i3bar
+set $refresh killall -s USR1 py3status
+
+# Volume controls
+bindsym XF86AudioLowerVolume exec $HOME/.i3/scripts/volume down && $refresh
+bindsym XF86AudioRaiseVolume exec $HOME/.i3/scripts/volume up && $refresh
+bindsym XF86AudioMute exec $HOME/.i3/scripts/volume toggle && $refresh
+
+# Brightness controls
+bindsym XF86MonBrightnessDown exec xbacklight -steps 1 -time 0 -dec 5
+bindsym XF86MonBrightnessUp exec xbacklight -steps 1 -time 0 -inc 10
+
+# Keyboard layouts
+# To enable any layout for switching, add it to i3kblayout.py command as an argument
+# The example here switches between US, TR and DE layouts
+bindsym Ctrl+space exec $HOME/.i3/scripts/i3kblayout.py us tr de && $refresh
+
