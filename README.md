@@ -13,10 +13,10 @@
  - [dunst](github.com/dunst-project/dunst)
 
 ## Installation ##
-1. Copy the files in `scripts` folder into `~/.i3/scripts` directory (create if it doesn't exist),
+1. Copy the files in `scripts` folder into `~/.config/i3/scripts` directory (create if it doesn't exist),
   and grant exec permissions.
 
-2. Append the lines in `i3config.example` to your i3 config file (`~/.i3/config`).
+2. Append the lines in `i3config.example` to your i3 config file (`~/.config/i3/config`).
 
 3. (If you want to use py3status) append the lines in `i3status.conf.example` to your
   `i3status.conf` file.
