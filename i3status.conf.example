@@ -25,6 +25,6 @@ volume master {
 
 external_script {
         format = " {output}"
-        script_path = "$HOME/.i3/scripts/i3layoutquery"
+        script_path = "$HOME/.config/i3/scripts/i3kblayout.py"
 }
 

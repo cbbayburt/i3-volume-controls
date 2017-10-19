@@ -11,14 +11,15 @@ def main():
     curLayout = check_output(['setxkbmap', '-query']).split(',')[0]
     curLayout = re.search('layout:\s+(.*)\n?$', curLayout).group(1)
 
-    if len(sys.argv) < 2:
-        print 'Usage:'
-        print '  i3kblayout [-q | --query]'
-        print '  i3kblayout layout1 [layoutN ..]'
+    if len(sys.argv) < 2 or sys.argv[1] == '-q' or sys.argv[1] == '--query':
+        print curLayout.upper()
         return
 
-    if sys.argv[1] == '-q' or sys.argv[1] == '--query':
-        print curLayout.upper()
+    if sys.argv[1] == '-h' or sys.argv[1] == '--help':
+        print 'Usage:'
+        print '  i3kblayout -h | --help'
+        print '  i3kblayout [-q | --query]'
+        print '  i3kblayout layout1 [layoutN ..]'
         return
 
     allLayouts = sys.argv[1:]
